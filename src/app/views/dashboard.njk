@@ -4,7 +4,7 @@
   <div class="content">
     <strong>Olá, {{ user.name }}</strong>
     {% if user.provider === true %}
-      <a href="/app/appointments/list/{{ user.id }}">Minha Agenda</a>
+      <a class='botao-agenda' href="/app/appointments/list/{{ user.id }}">Minha Agenda</a>
     {% endif %}
     <p>Inicie um agendamento com um dos profissionais abaixo:</p>
 

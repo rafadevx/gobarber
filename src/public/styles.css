@@ -226,6 +226,11 @@ ul.providers {
   color: #fff;
 }
 
+.botao-agenda {
+  margin-bottom: 1em;
+  text-align: center;
+}
+
 .user-info {
   flex-direction: column;
   box-sizing: border-box;
