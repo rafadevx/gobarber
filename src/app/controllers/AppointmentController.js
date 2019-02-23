@@ -1,3 +1,5 @@
+const moment = require('moment')
+const { Op } = require('sequelize')
 const { User, Appointment } = require('../models')
 
 class AppointmentController {
@@ -18,6 +20,33 @@ class AppointmentController {
     })
 
     return res.redirect('/app/dashboard')
+  }
+
+  async index (req, res) {
+    const date = moment(new Date())
+    const appointments = await Appointment.findAll({
+      where: {
+        provider_id: req.params.provider,
+        date: {
+          [Op.between]: [
+            date.startOf('day').format(),
+            date.endOf('day').format()
+          ]
+        }
+      },
+      include: [{
+        model: User, as: 'user'
+      }]
+
+    })
+
+    const list = appointments.map(a => {
+      return {
+        ...a, date: moment(a.date).format('HH:mm')
+      }
+    })
+
+    return res.render('appointments/list', { list })
   }
 }
 
